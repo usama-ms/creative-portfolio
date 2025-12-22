@@ -252,7 +252,7 @@ export default function Portfolio() {
               description="I’ve developed an AI-powered doctor’s assistant designed specifically for Brazilian doctors, now launched for over half a million practitioners. The platform helps doctors by analyzing patient health patterns and providing diagnostic support and treatment recommendations in real-time.
                 On the technical side, it leverages advanced AI techniques including RAG, fine-tuned models, OpenAI APIs, and vector databases like Pinecone. The app is built using React for the frontend, with LangChain orchestrating the AI workflows. I was the Senior Front End Developer in this."
               tags={["React", "GPT-4", "Pinecone", "AI Development", "LangChain"]}
-              image="/images/patientjourney.png"
+              image="/images/patientJourney.png"
               demoUrl="https://example.com"
               repoUrl="https://github.com"
             />
