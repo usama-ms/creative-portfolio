@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, Github, Linkedin, Mail } from "lucide-react"
+import { ArrowRight, Github, Linkedin, Mail, Briefcase } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { ProjectCard } from "@/components/project-card"
@@ -12,6 +12,7 @@ import { MouseFollower } from "@/components/mouse-follower"
 import { ScrollProgress } from "@/components/scroll-progress"
 import { SectionHeading } from "@/components/section-heading"
 import { GlassmorphicCard } from "@/components/glassmorphic-card"
+import { TypingAnimation } from "@/components/typing-animation"
 
 export default function Portfolio() {
   return (
@@ -39,24 +40,28 @@ export default function Portfolio() {
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
               <span className="block">Hi, I'm</span>
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-                Usama Ahmad
+                <TypingAnimation text="Usama Ahmad" speed={150} />
               </span>
             </h1>
             <p className="text-xl text-zinc-400 max-w-[600px]">
               I craft exceptional digital experiences with code, creativity, and a passion for innovation.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
-              <Button className="relative overflow-hidden group bg-gradient-to-r from-purple-500 to-pink-500 border-0">
-                <span className="relative z-10 flex items-center">
-                  View Projects <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
-                <span className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+              <Button asChild className="relative overflow-hidden group bg-gradient-to-r from-purple-500 to-pink-500 border-0">
+                <Link href="#projects">
+                  <span className="relative z-10 flex items-center">
+                    View Projects <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                </Link>
               </Button>
-              <Button
-                variant="outline"
-                className="border-zinc-700 text-pink-500 hover:text-pink-700 hover:border-zinc-500"
-              >
-                Contact Me
+              <Button asChild className="relative overflow-hidden group bg-gradient-to-r from-purple-500 to-pink-500 border-0">
+                <Link href="#contact">
+                  <span className="relative z-10 flex items-center">
+                    Start Your Project <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                </Link>
               </Button>
             </div>
             <div className="flex gap-4 pt-4">
@@ -88,6 +93,16 @@ export default function Portfolio() {
                 >
                   <Mail className="h-5 w-5" />
                   <span className="sr-only">Email</span>
+                </Button>
+              </Link>
+              <Link href="https://www.fiverr.com/usamaahmad81" target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-white"
+                >
+                  <Briefcase className="h-5 w-5" />
+                  <span className="sr-only">Fiverr</span>
                 </Button>
               </Link>
             </div>
@@ -249,20 +264,18 @@ export default function Portfolio() {
             />
             <ProjectCard
               title="Patient Journey: A healthcare platform backed by Brazilian Government"
-              description="I’ve developed an AI-powered doctor’s assistant designed specifically for Brazilian doctors, now launched for over half a million practitioners. The platform helps doctors by analyzing patient health patterns and providing diagnostic support and treatment recommendations in real-time.
+              description="I've developed an AI-powered doctor's assistant designed specifically for Brazilian doctors, now launched for over half a million practitioners. The platform helps doctors by analyzing patient health patterns and providing diagnostic support and treatment recommendations in real-time.
                 On the technical side, it leverages advanced AI techniques including RAG, fine-tuned models, OpenAI APIs, and vector databases like Pinecone. The app is built using React for the frontend, with LangChain orchestrating the AI workflows. I was the Senior Front End Developer in this."
               tags={["React", "GPT-4", "Pinecone", "AI Development", "LangChain"]}
               image="/images/patientJourney.png"
-              demoUrl="https://example.com"
-              repoUrl="https://github.com"
             />
             <ProjectCard
-              title="Portfolio Website"
-              description="This portfolio website built with Next.js and Tailwind CSS."
-              tags={["Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"]}
+              title="Windows 10 Portfolio: Interactive Desktop Experience"
+              description="An interactive portfolio website designed as a Windows 10 desktop clone that provides a unique and engaging way to showcase skills, projects, and professional information. Features a realistic Windows 10 UI with taskbar, start menu, and desktop icons. Users can interact with windows that can be moved, resized, minimized, and closed. Includes a login screen with animation, File Explorer to browse portfolio content, Chrome browser simulation, and multiple portfolio sections presented as folders for projects, skills, education, certifications, and contact details."
+              tags={["React", "Next.js", "Framer Motion", "CSS Modules", "Lucide React", "TypeScript"]}
               image="/images/Window-ui-clone.png"
-              demoUrl="https://example.com"
-              repoUrl="https://github.com"
+              demoUrl="https://uxmechanic.vercel.app/"
+              repoUrl="https://github.com/usama-ms/creative-portfolio"
             />
           </div>
         </div>
@@ -325,6 +338,17 @@ export default function Portfolio() {
                     <div className="font-medium">github.com/usama-ms</div>
                   </div>
                 </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center">
+                    <Briefcase className="h-5 w-5 text-purple-400" />
+                  </div>
+                  <div>
+                    <div className="text-sm text-zinc-500">Fiverr</div>
+                    <Link href="https://www.fiverr.com/usamaahmad81" target="_blank" rel="noopener noreferrer" className="font-medium hover:text-purple-400 transition-colors">
+                      fiverr.com/usamaahmad81
+                    </Link>
+                  </div>
+                </div>
               </div>
 
               <div className="mt-8 pt-8 border-t border-zinc-800">
@@ -382,6 +406,16 @@ export default function Portfolio() {
               >
                 <Mail className="h-5 w-5" />
                 <span className="sr-only">Email</span>
+              </Button>
+            </Link>
+            <Link href="https://www.fiverr.com/usamaahmad81" target="_blank" rel="noopener noreferrer">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-white"
+              >
+                <Briefcase className="h-5 w-5" />
+                <span className="sr-only">Fiverr</span>
               </Button>
             </Link>
           </div>

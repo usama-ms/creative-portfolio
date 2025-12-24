@@ -20,11 +20,43 @@ interface ProjectCardProps {
   description: string
   tags: string[]
   image: string
-  demoUrl: string
-  repoUrl: string
+  demoUrl?: string
+  repoUrl?: string
+}
+
+// Helper function to check if a URL is a valid, meaningful URL (not a placeholder)
+function isValidUrl(url?: string): boolean {
+  if (!url) return false
+  
+  try {
+    const urlObj = new URL(url.trim())
+    const pathname = urlObj.pathname
+    
+    // List of placeholder base domains
+    const placeholderDomains = ['example.com', 'www.example.com']
+    
+    // If it's a placeholder domain, it's invalid
+    if (placeholderDomains.includes(urlObj.hostname)) {
+      return false
+    }
+    
+    // For GitHub specifically, check if it's just the base domain (no meaningful path)
+    if (urlObj.hostname === 'github.com' || urlObj.hostname === 'www.github.com') {
+      // If pathname is empty or just '/', it's invalid (just the base domain)
+      // Valid GitHub URLs should have at least /username or /username/repo
+      return pathname.length > 1 && pathname.split('/').filter(Boolean).length > 0
+    }
+    
+    // For other domains, as long as it's a valid URL, it's considered valid
+    return urlObj.hostname.length > 0
+  } catch {
+    return false
+  }
 }
 
 export function ProjectCard({ title, description, tags, image, demoUrl, repoUrl }: ProjectCardProps) {
+  const hasValidDemoUrl = isValidUrl(demoUrl)
+  const hasValidRepoUrl = isValidUrl(repoUrl)
   const [isHovered, setIsHovered] = useState(false)
   const [isImageOpen, setIsImageOpen] = useState(false)
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2, triggerOnce: true })
@@ -56,7 +88,7 @@ export function ProjectCard({ title, description, tags, image, demoUrl, repoUrl 
             />
           </div>
 
-          <div className="p-6 flex-grow">
+          <div className="p-6 flex-grow flex flex-col">
             <h3 className="text-xl font-bold mb-2">{title}</h3>
             <p className="text-zinc-400 mb-4">{description}</p>
 
@@ -67,25 +99,42 @@ export function ProjectCard({ title, description, tags, image, demoUrl, repoUrl 
                 </Badge>
               ))}
             </div>
+          </div>
 
-            <div className="flex justify-between mt-auto pt-4 border-t border-zinc-700/50">
-              <Button variant="ghost" size="sm" className="text-zinc-400 hover:text-white hover:bg-zinc-700/50" asChild>
-                <Link href={repoUrl} target="_blank" rel="noopener noreferrer">
+          <div className="px-6 pb-6 flex justify-between border-t border-zinc-700/50 pt-4">
+              {hasValidRepoUrl ? (
+                <Button variant="ghost" size="sm" className="text-zinc-400 hover:text-white hover:bg-zinc-700/50" asChild>
+                  <Link href={repoUrl!} target="_blank" rel="noopener noreferrer">
+                    <Github className="mr-2 h-4 w-4" />
+                    Code
+                  </Link>
+                </Button>
+              ) : (
+                <Button variant="ghost" size="sm" className="text-zinc-500 cursor-not-allowed" disabled>
                   <Github className="mr-2 h-4 w-4" />
-                  Code
-                </Link>
-              </Button>
-              <Button
-                size="sm"
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 border-0"
-                asChild
-              >
-                <Link href={demoUrl} target="_blank" rel="noopener noreferrer">
-                  Live Demo
-                  <ArrowUpRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
+                  <span className="text-xs">Code is confidential</span>
+                </Button>
+              )}
+              {hasValidDemoUrl ? (
+                <Button
+                  size="sm"
+                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 border-0"
+                  asChild
+                >
+                  <Link href={demoUrl!} target="_blank" rel="noopener noreferrer">
+                    Live Demo
+                    <ArrowUpRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              ) : (
+                <Button
+                  size="sm"
+                  className="bg-zinc-700/50 text-zinc-400 cursor-not-allowed border-0"
+                  disabled
+                >
+                  <span className="text-xs">Internal client use</span>
+                </Button>
+              )}
           </div>
 
           <div className="absolute top-3 right-3 z-20">
