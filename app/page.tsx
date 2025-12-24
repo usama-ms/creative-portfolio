@@ -236,7 +236,7 @@ export default function Portfolio() {
               tags={["Next.js", "TypeScript", "Retrieval Augmented Generation", "Supabase", "OpenAI API", "React"]}
               image="/images/Torquewire.png"
               demoUrl="https://www.torquewire.com/"
-              repoUrl="https://github.com/usama-ms/"
+              repoUrl="https://github.com"
             />
             <ProjectCard
               title="TipHaus: Automated Tip management for Restaurants"
