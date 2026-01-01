@@ -274,8 +274,8 @@ export default function Portfolio() {
               description="An interactive portfolio website designed as a Windows 10 desktop clone that provides a unique and engaging way to showcase skills, projects, and professional information. Features a realistic Windows 10 UI with taskbar, start menu, and desktop icons. Users can interact with windows that can be moved, resized, minimized, and closed. Includes a login screen with animation, File Explorer to browse portfolio content, Chrome browser simulation, and multiple portfolio sections presented as folders for projects, skills, education, certifications, and contact details."
               tags={["React", "Next.js", "Framer Motion", "CSS Modules", "Lucide React", "TypeScript"]}
               image="/images/Window-ui-clone.png"
-              demoUrl="https://uxmechanic.vercel.app/"
-              repoUrl="https://github.com/usama-ms/creative-portfolio"
+              demoUrl="https://https://usama-windows.vercel.app/"
+              repoUrl="https://github.com/usama-ms/windows-portfolio"
             />
           </div>
         </div>
